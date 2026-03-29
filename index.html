@@ -16,66 +16,76 @@
             border-radius: 15px;
             display: inline-block;
         }
+        input {
+            padding: 8px;
+            border-radius: 6px;
+            border: none;
+            margin-right: 5px;
+        }
         button {
             background-color: white;
             color: #764ba2;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 8px;
             cursor: pointer;
         }
         button:hover {
             background-color: #ddd;
         }
+        #taskList {
+            list-style: none;
+            padding: 0;
+        }
+        #taskList li {
+            margin-top: 10px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px;
+            border-radius: 6px;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="card">
         <h1>Hello, I'm Tanya 👋</h1>
         <p>Beginner Developer | Learning & Building 🚀</p>
         <p>I am a student learning web development and preparing for hackathons.</p>
-       <input type="text" id="taskInput" placeholder="Enter your task" />
-<button onclick="addTask()">Add Task</button>
 
-<ul id="taskList"></ul>
+        <input type="text" id="taskInput" placeholder="Enter your task" />
+        <button onclick="addTask()">Add Task</button>
+
+        <ul id="taskList"></ul>
     </div>
 
     <script>
-       <script>
-function addTask() {
-    let input = document.getElementById("taskInput");
-    let task = input.value;
+        function addTask() {
+            let input = document.getElementById("taskInput");
+            let task = input.value;
 
-    if (task === "") return;
+            if (task === "") return;
 
-    let li = document.createElement("li");
-    li.innerText = task + " ";
+            let li = document.createElement("li");
 
-    let btn = document.createElement("button");
-    btn.innerText = "❌";
-    btn.onclick = function() {
-        li.remove();
-    };
+            let span = document.createElement("span");
+            span.innerText = task;
 
-    li.appendChild(btn);
-    document.getElementById("taskList").appendChild(li);
+            let btn = document.createElement("button");
+            btn.innerText = "❌";
+            btn.style.marginLeft = "10px";
 
-    input.value = "";
-}
-</script>
-    let input = document.getElementById("taskInput");
-    let task = input.value;
+            btn.onclick = function() {
+                li.remove();
+            };
 
-    if (task === "") return;
+            li.appendChild(span);
+            li.appendChild(btn);
 
-    let li = document.createElement("li");
-    li.innerText = task;
+            document.getElementById("taskList").appendChild(li);
 
-    document.getElementById("taskList").appendChild(li);
-
-    input.value = "";
-}
+            input.value = "";
+        }
     </script>
 
 </body>
