@@ -95,7 +95,55 @@
 
             input.value = "";
         }
-    </script>
+   <script>
+let tasks = [];
+
+// Load tasks when page opens
+window.onload = function() {
+    let saved = localStorage.getItem("tasks");
+    if (saved) {
+        tasks = JSON.parse(saved);
+        tasks.forEach(task => displayTask(task));
+    }
+};
+
+function addTask() {
+    let input = document.getElementById("taskInput");
+    let task = input.value;
+
+    if (task === "") return;
+
+    tasks.push(task);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    displayTask(task);
+
+    input.value = "";
+}
+
+function displayTask(task) {
+    let li = document.createElement("li");
+
+    let span = document.createElement("span");
+    span.innerText = task;
+
+    let btn = document.createElement("button");
+    btn.innerText = "❌";
+    btn.style.marginLeft = "10px";
+
+    btn.onclick = function() {
+        li.remove();
+
+        tasks = tasks.filter(t => t !== task);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    };
+
+    li.appendChild(span);
+    li.appendChild(btn);
+
+    document.getElementById("taskList").appendChild(li);
+}
+</script>
 
 </body>
 </html>
