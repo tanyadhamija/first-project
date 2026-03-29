@@ -93,18 +93,43 @@ function addTask() {
 
     input.value = "";
 }
-
 function displayTask(task) {
     let li = document.createElement("li");
 
     let span = document.createElement("span");
     span.innerText = task;
 
-    let btn = document.createElement("button");
-    btn.innerText = " ❌";
-    btn.style.marginLeft = "10px";
+    // ✅ Complete toggle
+    span.onclick = function() {
+        if (span.style.textDecoration === "line-through") {
+            span.style.textDecoration = "none";
+        } else {
+            span.style.textDecoration = "line-through";
+        }
+    };
 
-    btn.onclick = function() {
+    // ✏️ Edit button
+    let editBtn = document.createElement("button");
+    editBtn.innerText = "✏️";
+
+    editBtn.onclick = function() {
+        let newTask = prompt("Edit your task:", span.innerText);
+        if (newTask !== null && newTask !== "") {
+            span.innerText = newTask;
+
+            tasks = tasks.map(t => t === task ? newTask : t);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+
+            task = newTask;
+        }
+    };
+
+    // ❌ Delete button
+    let delBtn = document.createElement("button");
+    delBtn.innerText = "❌";
+    delBtn.style.marginLeft = "5px";
+
+    delBtn.onclick = function() {
         li.remove();
 
         tasks = tasks.filter(t => t !== task);
@@ -112,7 +137,8 @@ function displayTask(task) {
     };
 
     li.appendChild(span);
-    li.appendChild(btn);
+    li.appendChild(editBtn);
+    li.appendChild(delBtn);
 
     document.getElementById("taskList").appendChild(li);
 }
