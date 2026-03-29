@@ -2,105 +2,82 @@
 <html>
 <head>
     <title>Tanya's First Project</title>
+
     <style>
         body {
             background: linear-gradient(to right, #667eea, #764ba2);
             font-family: Arial, sans-serif;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
             color: white;
-           body {
-    background: linear-gradient(to right, #667eea, #764ba2);
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    color: white;
-}
         }
+
         .card {
             background: rgba(255, 255, 255, 0.1);
             padding: 30px;
             border-radius: 15px;
-            display: inline-block;
+            text-align: center;
+            width: 300px;
         }
+
         input {
             padding: 8px;
             border-radius: 6px;
             border: none;
-            margin-right: 5px;
+            width: 70%;
         }
+
         button {
             background-color: white;
             color: #764ba2;
             border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
             cursor: pointer;
+            margin-top: 10px;
         }
+
         button:hover {
             background-color: #ddd;
         }
-        #taskList {
+
+        ul {
             list-style: none;
             padding: 0;
+            margin-top: 20px;
         }
-        #taskList li {
-            margin-top: 10px;
+
+        li {
+            margin: 10px 0;
             background: rgba(255,255,255,0.2);
             padding: 8px;
-            border-radius: 6px;
+            border-radius: 8px;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="card">
-        <h1>Hello, I'm Tanya 👋</h1>
-        <p>Beginner Developer | Learning & Building 🚀</p>
-        <p>I am a student learning web development and preparing for hackathons.</p>
+<div class="card">
+    <h1>Hello, I'm Tanya 👋</h1>
+    <p>Beginner Developer | Learning & Building 🚀</p>
 
-        <input type="text" id="taskInput" placeholder="Enter your task" />
-        <button onclick="addTask()">Add Task</button>
+    <input type="text" id="taskInput" placeholder="Enter your task">
+    <br>
+    <button onclick="addTask()">Add Task</button>
 
-        <ul id="taskList"></ul>
-    </div>
+    <ul id="taskList"></ul>
+</div>
 
-    <script>
-        function addTask() {
-            let input = document.getElementById("taskInput");
-            let task = input.value;
-
-            if (task === "") return;
-
-            let li = document.createElement("li");
-
-            let span = document.createElement("span");
-            span.innerText = task;
-
-            let btn = document.createElement("button");
-            btn.innerText = "❌";
-            btn.style.marginLeft = "10px";
-
-            btn.onclick = function() {
-                li.remove();
-            };
-
-            li.appendChild(span);
-            li.appendChild(btn);
-
-            document.getElementById("taskList").appendChild(li);
-
-            input.value = "";
-        }
-   <script>
+<script>
 let tasks = [];
 
-// Load tasks when page opens
 window.onload = function() {
     let saved = localStorage.getItem("tasks");
+
     if (saved) {
         tasks = JSON.parse(saved);
         tasks.forEach(task => displayTask(task));
@@ -128,7 +105,7 @@ function displayTask(task) {
     span.innerText = task;
 
     let btn = document.createElement("button");
-    btn.innerText = "❌";
+    btn.innerText = " ❌";
     btn.style.marginLeft = "10px";
 
     btn.onclick = function() {
