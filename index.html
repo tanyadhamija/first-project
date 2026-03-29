@@ -35,13 +35,26 @@
         <h1>Hello, I'm Tanya 👋</h1>
         <p>Beginner Developer | Learning & Building 🚀</p>
         <p>I am a student learning web development and preparing for hackathons.</p>
-        <button onclick="showMessage()">Click Me</button>
+       <input type="text" id="taskInput" placeholder="Enter your task" />
+<button onclick="addTask()">Add Task</button>
+
+<ul id="taskList"></ul>
     </div>
 
     <script>
-        function showMessage() {
-            alert("Welcome to my first project 🎉");
-        }
+       function addTask() {
+    let input = document.getElementById("taskInput");
+    let task = input.value;
+
+    if (task === "") return;
+
+    let li = document.createElement("li");
+    li.innerText = task;
+
+    document.getElementById("taskList").appendChild(li);
+
+    input.value = "";
+}
     </script>
 
 </body>
